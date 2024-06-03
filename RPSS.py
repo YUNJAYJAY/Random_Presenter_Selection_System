@@ -7,14 +7,14 @@ from PIL import Image, ImageTk
 import time
 
 # Haar Cascade 분류기 파일 경로
-face_cascade_path = 'haarcascade_frontalface_default.xml'
+face_cascade_path = 'haarcascade_frontalface_alt.xml'
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + face_cascade_path)
 
 # Tkinter 창 설정
 root = tk.Tk()
 root.geometry("640x640+100+100")
 root.resizable(True, True)
-root.title("Random Face Selector")
+root.title("Random Presenter Selection System")
 
 # 얼굴 탐지 결과를 표시할 라벨
 image_label = Label(root)
@@ -45,7 +45,7 @@ def load_image():
         if image is not None:
             image = resize_image(image, 640, 400)  # 이미지를 고정된 크기로 리사이즈
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-            faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=4, minSize=(30, 30))
+            faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=2, minSize=(10, 10))
 
             detected_faces = []
             for (x, y, w, h) in faces:
